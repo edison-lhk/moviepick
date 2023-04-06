@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+        <title>MoviePick</title>
+    </head>
+    <body>
+        <div class="page-container">
+            {% with messages = get_flashed_messages(with_categories = True) %}
+                {% if messages %}
+                    <div class="flash-container">
+                    {% for category, message in messages %}
+                        {% if category == 'error' %}
+                            <div class="toast error">
+                                <p class="toast-text">{{ message }}</p>
+                                <span class="glyphicon glyphicon-remove toast-btn"></span>
+                            </div>
+                        {% else %}
+                            <div class="toast info">
+                                <p class="toast-text">{{ message }}</p>
+                                <span class="glyphicon glyphicon-remove toast-btn"></span>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            <div class="menu-container">
+                <div class="icon-container">
+                    <img src="{{ url_for('static', filename='images/favicon.ico') }}" alt="MoviePick">
+                    <h3 class="moviepick-text">MoviePick</h3>
+                    <span class="glyphicon glyphicon-remove"></span>
+                </div>
+                {% if user %}
+                    <div class="section-container">
+                        <p>Sections</p>
+                        <div class="sections">
+                            <nav class="section home">
+                                <span class="glyphicon glyphicon-home"></span>
+                                <p>Home</p>
+                            </nav>
+                            <nav class="section edit-profile">
+                                <span class="glyphicon glyphicon-user"></span>
+                                <p>Edit Profile</p>
+                            </nav>
+                            <nav class="section my-favourite">
+                                <span class="glyphicon glyphicon-heart"></span>
+                                <p>My Favourite</p>
+                            </nav>
+                            <nav class="section watch-history">
+                                <span class="glyphicon glyphicon-folder-open"></span>
+                                <p>Watch History</p>
+                            </nav>
+                            <nav class="section logout">
+                                <span class="glyphicon glyphicon-log-out"></span>
+                                <p>Logout</p>
+                            </nav>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="category-container">
+                    <p>Categories</p>
+                    <div class="categories">
+                        <nav class="category popular">
+                            <span class="glyphicon glyphicon-film"></span>
+                            <p>Popular</p>
+                        </nav>
+                        <nav class="category top-rated">
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                            <p>Top Rated</p>
+                        </nav>
+                        <nav class="category upcoming">
+                            <span class="glyphicon glyphicon-road"></span>
+                            <p>Upcoming</p>
+                        </nav>
+                    </div>
+                </div>
+                <div class="genre-container">
+                    <p>Genres</p>
+                    <div class="genres">
+                        <nav class="genre action">
+                            <span class="glyphicon glyphicon-screenshot"></span>
+                            <p>Action</p>
+                        </nav>
+                        <nav class="genre adventure">
+                            <span class="glyphicon glyphicon-picture"></span>
+                            <p>Adventure</p>
+                        </nav>
+                        <nav class="genre animation">
+                            <span class="glyphicon glyphicon-road"></span>
+                            <p>Animation</p>
+                        </nav>
+                        <nav class="genre comedy">
+                            <span class="glyphicon glyphicon-film"></span>
+                            <p>Comedy</p>
+                        </nav>
+                        <nav class="genre crime">
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                            <p>Crime</p>
+                        </nav>
+                        <nav class="genre documentary">
+                            <span class="glyphicon glyphicon-facetime-video"></span>
+                            <p>Documentary</p>
+                        </nav>
+                        <nav class="genre drama">
+                            <span class="glyphicon glyphicon-film"></span>
+                            <p>Drama</p>
+                        </nav>
+                        <nav class="genre family">
+                            <span class="glyphicon glyphicon-tree-conifer"></span>
+                            <p>Family</p>
+                        </nav>
+                        <nav class="genre fantasy">
+                            <span class="glyphicon glyphicon-road"></span>
+                            <p>Fantasy</p>
+                        </nav>
+                        <nav class="genre history">
+                            <span class="glyphicon glyphicon-book"></span>
+                            <p>History</p>
+                        </nav>
+                        <nav class="genre horror">
+                            <span class="glyphicon glyphicon-tint"></span>
+                            <p>Horror</p>
+                        </nav>
+                        <nav class="genre music">
+                            <span class="glyphicon glyphicon-music"></span>
+                            <p>Music</p>
+                        </nav>
+                        <nav class="genre mystery">
+                            <span class="glyphicon glyphicon-film"></span>
+                            <p>Mystery</p>
+                        </nav>
+                        <nav class="genre romance">
+                            <span class="glyphicon glyphicon-glass"></span>
+                            <p>Romance</p>
+                        </nav>
+                        <nav class="genre science-fiction">
+                            <span class="glyphicon glyphicon-road"></span>
+                            <p>Science Fiction</p>
+                        </nav>
+                        <nav class="genre tv-movie">
+                            <span class="glyphicon glyphicon-film"></span>
+                            <p>TV Movie</p>
+                        </nav>
+                        <nav class="genre thriller">
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                            <p>Thriller</p>
+                        </nav>
+                        <nav class="genre war">
+                            <span class="glyphicon glyphicon-road"></span>
+                            <p>War</p>
+                        </nav>
+                        <nav class="genre western">
+                            <span class="glyphicon glyphicon-road"></span>
+                            <p>Western</p>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="main-container">
+                <div class="nav-bar-container">
+                    <span class="glyphicon glyphicon-menu-hamburger mobile-menu-btn"></span>
+                    <form action="/search-movie" method="GET" class="search-form">
+                        <input type="text" name="query" class="search-input" autocomplete="off" required>
+                        <button type="submit" class="search-btn"><span class="glyphicon glyphicon-search"></span></button>
+                    </form>
+                    <div class="user-container">
+                        <span class="glyphicon glyphicon-user"></span>
+                        {% if user: %}
+                            <p class="username-text">{{ user }}</p>
+                        {% else %}
+                            <a href="/login" class="login-text">Login</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+    </body>
+</html>

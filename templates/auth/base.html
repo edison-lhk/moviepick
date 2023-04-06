@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+        <title>MoviePick</title>
+    </head>
+    <body>
+        <div class="page-container">
+            {% with messages = get_flashed_messages(with_categories = True) %}
+                {% if messages %}
+                    <div class="flash-container">
+                    {% for category, message in messages %}
+                        {% if category == 'error' %}
+                            <div class="toast error">
+                                <p class="toast-text">{{ message }}</p>
+                                <span class="glyphicon glyphicon-remove toast-btn"></span>
+                            </div>
+                        {% else %}
+                        <div class="toast info">
+                            <p class="toast-text">{{ message }}</p>
+                            <span class="glyphicon glyphicon-remove toast-btn"></span>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            <div class="form-container">
+                <img src="{{ url_for('static', filename='images/favicon.ico') }}" alt="MoviePick">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+    </body>
+</html>

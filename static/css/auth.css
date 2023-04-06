@@ -1,0 +1,213 @@
+/* CSS reset */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Basic style for the whole page */
+body {
+    margin: 0;
+    padding: 0;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: white;
+    background-image: url('../images/movie-background.jpg');
+}
+
+/* Style for the page container */
+.page-container {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Style for the flash content */
+.flash-container {
+    position: absolute;
+    top: 20px;
+    right: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.toast {
+    min-width: 200px;
+    padding: 13px 10px;
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.toast.error {
+    background-color: #dc3545;
+}
+
+.toast.info {
+    background-color: #28a745;
+}
+
+.toast-text {
+    margin: 0;
+}
+
+.toast-btn {
+    cursor: pointer;
+}
+
+/* Style for the login/signup form */
+.form-container {
+    padding: 45px;
+    width: 390px;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.form {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-container {
+    position: relative;
+    height: 40px;
+}
+
+.input-container .glyphicon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 15px;
+}
+
+.form-input {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    padding: 10px 20px 10px 45px;
+    border-bottom: 1px solid #333333;
+}
+
+.form-input:focus {
+    outline: none;
+    border-bottom: 1px solid red;
+}
+
+button {
+    margin-top: 15px;
+    height: 45px;
+    border: none;
+    font-size: 16px;
+    background-color: red;
+}
+
+/* Style for the prompting users to login/signup */
+.prompt-container {
+    margin-top: 20px;
+    display: flex;
+    gap: 5px;
+    font-size: 12px;
+}
+
+.prompt-container p {
+    color: #888888;
+}
+
+.prompt-container a {
+    color: white;
+}
+
+/* Style change when screen size <= 700px */
+@media only screen and (max-width: 700px) {
+    .flash-container {
+        right: 30px;
+    }
+    .form-container {
+        width: 370px;
+    }
+}
+
+/* Style change when screen size <= 500px */
+@media only screen and (max-width: 500px) {
+    .toast {
+        min-width: 150px;
+        font-size: 12px;
+        gap: 30px;
+    }
+    .form-container {
+        width: 350px;
+    }
+}
+
+/* Style change when screen size <= 400px */
+@media only screen and (max-width: 400px) {
+    .flash-container {
+        right: 10px;
+    }
+    .toast {
+        min-width: 100px;
+        font-size: 3vw;
+        gap: 7.5vw;
+        padding: 3.25vw 10px;
+    }
+    .form-container {
+        padding: 35px 45px;
+    }
+    .form-container img {
+        width: 12vw;
+        height: 12vw;
+    }
+    .text-container h3 {
+        font-size: 6vw;
+    }
+    .text-container h5 {
+        font-size: 3.5vw;
+    }
+    .form {
+        margin-top: 20px;
+    }
+    .form-input {
+        font-size: 4vw;
+    }
+    .input-container .glyphicon {
+        font-size: 4vw;
+    }
+    button {
+        font-size: 4vw;
+        margin-top: 10px;
+        height: 11.25vw;
+    }
+    .prompt-container {
+        font-size: 3vw;
+    }
+}
+
+/* Style change when screen size <= 270px */
+@media only screen and (max-width: 270px) {
+    .toast {
+        min-width: 50vw;
+        gap: 10px;
+    }
+    .form-container {
+        padding: 30px 11vw;
+    }
+    .form {
+        margin-top: 10px;
+        gap: 3vw;
+    }
+    .form-input {
+        padding: 0 20px 0 45px;
+        height: 80%;
+    }
+    .input-container .glyphicon {
+        transform: translateY(-80%);
+    }
+    button {
+        margin-top: 0;
+    }
+}

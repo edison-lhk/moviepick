@@ -1,0 +1,31 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+    <div class="watch-history-container">
+        <h3 class="watch-history-text">Watch History</h3>
+        {% if watch_history | length > 0 %}
+            <div class="watch-history">
+                {% for history in watch_history %}
+                    <div class="history-card">
+                        <img id="{{ history['id'] }}" src="https://image.tmdb.org/t/p/w200/{{ history['backdrop_path'] }}" alt="{{ history['original_title'] }}">
+                        <div class="info-container">
+                            <div class="info">
+                                <div class="meta-data-container">
+                                    <p class="title-text">{{ history['original_title'] }} | Rating: {{ history['vote_average'] }}</p>
+                                    <p class="overview-text">{{ history['overview'] }}</p>
+                                </div>
+                                <p class="last-watched-text">{{ history['last_watched'] }}</p>
+                            </div>
+                            <span class="glyphicon glyphicon-trash {{ history['id'] }} {{ history['last_watched'] }}"></span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-history-text-container">
+                <span class="glyphicon glyphicon-time"></span>
+                <p class="no-history-text">You don't have any watch history yet...</p>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

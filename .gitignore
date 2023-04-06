@@ -1,0 +1,5 @@
+.DS_Store
+.env
+env/
+routes/__pycache__/
+database.db

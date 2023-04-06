@@ -1,0 +1,97 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+    <div class="movies-container">
+        {% if user and home %}
+            <h3 class="welcome-text">Welcome {{ user }}!</h3>
+        {% endif %}
+        <div id="movie-carousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#movie-carousel" data-slide-to="1"></li>
+                <li data-target="#movie-carousel" data-slide-to="2"  class="active"></li>
+                <li data-target="#movie-carousel" data-slide-to="3"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <div class="item" id="{{ movies[2]['id'] }}">
+                    <div class="carousel-image">
+                        <img src="https://image.tmdb.org/t/p/w1280/{{ movies[2]['backdrop_path'] }}" alt="movies[2]['original_title']">
+                    </div>
+                    <div class="carousel-caption">
+                        <h3>{{ movies[2]['original_title'] }}</h3>
+                        {% if movies[2]['overview'] | length >= 220 %}
+                            <p>{{ movies[2]['overview'][:220] + '...' }}</p>
+                        {% else %}
+                            <p>{{ movies[2]['overview'] }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="item active" id="{{ movies[0]['id'] }}">
+                    <div class="carousel-image">
+                        <img src="https://image.tmdb.org/t/p/w1280/{{ movies[0]['backdrop_path'] }}" alt="movies[0]['original_title']">
+                    </div>
+                    <div class="carousel-caption">
+                        <h3>{{ movies[0]['original_title'] }}</h3>
+                        {% if movies[0]['overview'] | length >= 220 %}
+                            <p>{{ movies[0]['overview'][:220] + '...' }}</p>
+                        {% else %}
+                            <p>{{ movies[0]['overview'] }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="item" id="{{ movies[1]['id'] }}">
+                    <div class="carousel-image">
+                        <img src="https://image.tmdb.org/t/p/w1280/{{ movies[1]['backdrop_path'] }}" alt="movies[1]['original_title']">
+                    </div>
+                    <div class="carousel-caption">
+                        <h3>{{ movies[1]['original_title'] }}</h3>
+                        {% if movies[1]['overview'] | length >= 220 %}
+                            <p>{{ movies[1]['overview'][:220] + '...' }}</p>
+                        {% else %}
+                            <p>{{ movies[1]['overview'] }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <a class="left carousel-control" href="#movie-carousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#movie-carousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <div class="movie-list-container">
+            {% for movie in movies[3:-2] %}
+                <div class="movie-card-container">
+                    <img id="{{ movie['id'] }}" src="https://image.tmdb.org/t/p/w200/{{ movie['poster_path'] }}" alt="{{ movie['original_title'] }}">
+                    <div class="info-container">
+                        <p class="title-text">
+                            {% if movie['original_title'] | length > 20 %}
+                                {{ movie['original_title'][:17] + '...' }}
+                            {% else %}
+                                {{ movie['original_title'] }}
+                            {% endif %}
+                        </p>
+                        <p class="rating-text">Rating: {{ movie['vote_average'] }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <nav class="movies-page-nav" aria-label="Movies Page Navigation">
+            <ul class="pagination">
+              <li class="page-item previous">
+                <a class="page-link" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li class="page-item page-num"><a class="page-link">1</a></li>
+              <li class="page-item next">
+                <a class="page-link" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+        </nav>
+    </div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+    <div class="edit-profile-container">
+        <h3 class="edit-profile-text">My Profile</h3>
+        <form action="/edit-profile" method="POST" class="edit-profile-form">
+            <span class="glyphicon glyphicon-user"></span>
+            <div class="username-input-container">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" value="{{ user }}" readonly>
+            </div>
+            <div class="password-input-container">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" placeholder="Change your password here..." autocomplete="off" required>
+            </div>
+            <div class="confirm-password-input-container">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm your password..." autocomplete="off" required>
+            </div>
+            <button type="submit" class="edit-profile-btn">Edit</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'auth/base.html' %}
+
+{% block content %}
+    <div class="text-container">
+        <h3 class="greeting">Sign Up</h3>
+        <h5 class="description">Become our member...</h5>
+    </div>
+    <form action="{{ url_for('auth.sign_up') }}" method="POST" class="form sign-up-form">
+        <div class="input-container">
+            <span class="glyphicon glyphicon-user"></span>
+            <input type="text" name="username" class="form-input username-input" placeholder="Username" autocomplete="off" required>
+        </div>
+        <div class="input-container">
+            <span class="glyphicon glyphicon-lock"></span>
+            <input type="password" name="password" class="form-input password-input" placeholder="Password" autocomplete="off" required>
+        </div>
+        <div class="input-container">
+            <span class="glyphicon glyphicon-lock"></span>
+            <input type="password" name="confirm-password" class="form-input confirm-password-input" placeholder="Confirm Password" autocomplete="off" required>
+        </div>
+        <button type="submit" class="sign-up-btn">Get Started <span class="glyphicon glyphicon-menu-right"></span></button>
+    </form>
+    <div class="prompt-container login-container">
+        <p class="login-text">Already our member?</p>
+        <a href="{{ url_for('auth.login') }}">Login Now</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+    <div class="my-favourite-container">
+        <h3 class="my-favourite-text">My Favourite</h3>
+        {% if my_favourite | length > 0 %}
+            <div class="my-favourite">
+                {% for favourite in my_favourite %}
+                    <div class="favourite-card">
+                        <img id="{{ favourite['id'] }}" src="https://image.tmdb.org/t/p/w200/{{ favourite['backdrop_path'] }}" alt="{{ favourite['original_title'] }}">
+                        <div class="info-container">
+                            <div class="info">
+                                <div class="meta-data-container">
+                                    <p class="title-text">{{ favourite['original_title'] }} | Rating: {{ favourite['vote_average'] }}</p>
+                                    <p class="overview-text">{{ favourite['overview'] }}</p>
+                                </div>
+                                <p class="last-watched-text">{{ favourite['last_watched'] }}</p>
+                            </div>
+                            <span class="glyphicon glyphicon-heart {{ favourite['id'] }}"></span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-favourite-text-container">
+                <span class="glyphicon glyphicon-heart"></span>
+                <p class="no-favourite-text">You don't have any favourite movie yet...</p>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

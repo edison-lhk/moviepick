@@ -1,0 +1,186 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+    <div class="movie-details-container">
+        <section class="hero-section" style="background-image: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.8), rgb(0,0,0)), url('https://image.tmdb.org/t/p/w1280/{{ movie.backdrop_path }}'); background-size: cover; background-repeat: no-repeat">
+            <div class="poster-container">
+                <img class="poster" src="https://image.tmdb.org/t/p/w400/{{ movie['poster_path'] }}" alt="{{ movie['original_title'] }}">
+            </div>
+            <div class="info-container">
+                <h1 class="movie-title">
+                    {{ movie['original_title'] }} ({{ movie['release_date'][:4] }})
+                    {% if user %}
+                        {% if movie['my_favourite'] %}
+                            <span class="glyphicon glyphicon-heart {{ movie['id'] }}"></span>
+                        {% else %}
+                            <span class="glyphicon glyphicon-heart-empty {{ movie['id'] }}"></span>
+                        {% endif %}
+                    {% endif %}
+                </h1>
+                <p class="movie-quote">{{ movie['tagline'] }}</p>
+                <ul class="movie-genres-list">
+                    {% for genre in movie['genres'] %}
+                        <li>{{ genre['name'] }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="movie-stats">
+                <p>Rating</p>
+                <p class="rating">{{ movie['vote_average'] }}</p>
+            </div>
+        </section>
+        <section class="details-section">
+            <div class="movie-info">
+                <div class="detailed-info">
+                    <div class="metadata">
+                        <p class="duration">{{ movie['runtime'] }}M</p>
+                    </div>
+                    <div class="overview">
+                        <h3>Overview</h3>
+                        <p>{{ movie['overview'] }}</p>
+                    </div>
+                </div>
+                {% if movie['videos']['results'] | length > 0 %}
+                    <div class="movie-trailer">
+                        <h3>Watch Trailer</h3>
+                        <iframe width="950" height="500" title="{{movie['original_title']}} Trailer" frameBorder="0" allow="fullscreen" src="https://www.youtube.com/embed/{{movie['videos']['results'][0]['key']}}"></iframe>
+                    </div>
+                {% endif %}
+            </div>
+            {% if movie['credits']['cast'] | length > 0 and movie['credits']['crew'] | length > 0 %}
+                <div class="movie-credits">
+                    {% if movie['credits']['cast'] | length > 0 %}
+                        <div class="cast-list">
+                            <h3>Cast</h3>
+                            <div class="cast-card-list">
+                                {% for cast in movie['credits']['cast'] %}
+                                    <div class="cast-card">
+                                        <div class="container">
+                                                <div class="cast-photo">
+                                                    {% if cast['profile_path'] %}
+                                                        <img src="https://image.tmdb.org/t/p/w200/{{cast['profile_path']}}" alt="{{ cast['name'] }}">
+                                                    {% else %}
+                                                        <img src="https://via.placeholder.com/100x100?text={{cast['name']}}" alt="{{ cast['name'] }}">
+                                                    {% endif %}
+                                                </div>
+                                                <div class="cast-info">
+                                                    <p class="name">{{ cast['name'] }}</p>
+                                                    <p class="role">{{ cast['character'] }}</p>
+                                                </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if movie['credits']['crew'] | length > 0 %}
+                        <div class="crew-list">
+                            <h3>Crew</h3>
+                            <div class="crew-card-list">
+                                {% for crew in movie['credits']['crew'] %}
+                                    <div class="crew-card">
+                                        <div class="container">
+                                                <div class="crew-photo">
+                                                    {% if crew['profile_path'] %}
+                                                        <img src="https://image.tmdb.org/t/p/w200/{{crew['profile_path']}}" alt="{{ crew['name'] }}">
+                                                    {% else %}
+                                                        <img src="https://via.placeholder.com/100x100?text={{crew['name']}}" alt="{{ crew['name'] }}">
+                                                    {% endif %}
+                                                </div>
+                                                <div class="crew-info">
+                                                    <p class="name">{{ crew['name'] }}</p>
+                                                    <p class="role">{{ crew['job'] }}</p>
+                                                </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </section>
+        <section class="review-section">
+            <h3>Reviews</h3>
+            {% if user %}
+                <form class="add-review-form {{ movie['id'] }}">
+                    <div class="rating-input-container">
+                            <label for="rating">Rating:</label>
+                            <select name="rating" id="rating-input">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </div>
+                    <input type='text' name="review" class="review-input" placeholder='Leave any reviews...' autocomplete='off' required>
+                    <button type="submit" class="post-btn">Post</button>
+                </form>
+            {% endif %}
+            {% if movie['reviews']['results'] | length > 0 %}
+                <div class="review-card-list">
+                    {% for review in movie['reviews']['results'] %}
+                        <div class="review-card">
+                            <div class="review-info">
+                                <div class="review-photo">
+                                    {% if review['author_details']['avatar_path'] %}
+                                        {% if 'https' in review['author_details']['avatar_path'] %}
+                                            <img src="{{review['author_details']['avatar_path'][1:]}}" alt="{{review['author']}}">
+                                        {% else %}
+                                            <img src="https://image.tmdb.org/t/p/w200/{{review['author_details']['avatar_path']}}" alt="{{review['author']}}">
+                                        {% endif %}
+                                    {% else %}
+                                        <img src="https://via.placeholder.com/100x100?text={{review['author']}}" alt="{{review['author']}}">
+                                    {% endif %}
+                                </div>
+                                <div class="review-author">
+                                    <p class="name">{{ review['author'] }}</p>
+                                    <p class="date">{{ review['updated_at'][:10] }}</p>
+                                </div>
+                                <div class="review-rating">
+                                    <p>Rating:</p>
+                                    <span>{{ review['author_details']['rating'] }}</span>
+                                </div>
+                            </div>
+                            <div className="review-content">
+                                {% if review['content'] | length > 500 %}
+                                    <p>{{ review['content'][:500] + '...' }}</p>
+                                {% else %}
+                                    <p>{{ review['content'] }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </section>
+        {% if movie['recommendations']['results'] | length > 0 %}
+            <section class="recommendations-section">
+                <h3>You may also like...</h3>
+                <div class="recommendations-list">
+                    {% for recommendation in movie['recommendations']['results'] %}
+                        <div class="movie-card-container">
+                            <img id="{{ recommendation['id'] }}" src="https://image.tmdb.org/t/p/w200/{{ recommendation['poster_path'] }}" alt="{{ recommendation['original_title'] }}">
+                            <div class="info-container">
+                                <p class="title-text">
+                                    {% if recommendation['original_title'] | length > 17 %}
+                                        {{ recommendation['original_title'][:14] + '...' }}
+                                    {% else %}
+                                        {{ recommendation['original_title'] }}
+                                    {% endif %}
+                                </p>
+                                <p class="rating-text">Rating: {{ recommendation['vote_average'] }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        {% endif %}
+    </div>
+{% endblock %}
