@@ -1,4 +1,4 @@
-# MoviePick 🍿
+<h1 align="center">MoviePick 🍿</h1>
 
 ## Description:
 
@@ -57,3 +57,7 @@ TMDB_API_KEY='API KEY VALUE'
 ```bash
 $ python3 app.py
 ```
+
+## Language and Tools:
+
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML Badge" style="padding-right: 10px;"> <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS Badge" style="padding-right: 10px;"> <img src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E" alt="CSS Badge" style="padding-right: 10px;"> <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python Badge" style="padding-right: 10px;"> <img src="https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white" alt="Flask Badge" style="padding-right: 10px;"> <img src="https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite Badge" style="padding-right: 10px;">
